@@ -1,6 +1,6 @@
 # Tmux Sessionizer 
 
-Tmux Sessionizer stolen from ThePrimeagen.
+Tmux sessionizer as seen from ThePrimeagen.
 
 ## Prerequisites
 
