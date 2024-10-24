@@ -20,8 +20,13 @@ function _tmux_sessionizer() {
   local session_name=$(basename "$selected_dir" | tr . _)
 
   if [[ -z "$TMUX" ]]; then
-    # If not in tmux, create a new session and attach to it
-    tmux new-session -s "$session_name" -c "$selected_dir"
+    # Not in a tmux session
+    # If session doesn't exist, create it, otherwise attach
+    if ! tmux has-session -t="$session_name" 2>/dev/null; then
+      tmux new-session -s "$session_name" -c "$selected_dir"
+    else
+      tmux attach-session -t "$session_name"
+    fi
   else
     # If session doesn't exist, create it
     if ! tmux has-session -t="$session_name" 2> /dev/null; then
